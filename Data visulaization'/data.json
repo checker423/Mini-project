@@ -1,0 +1,17 @@
+[
+    {"id": 1, "name": "Krish", "math": 85, "science": 90, "english": 78, "history": 88, "status": "Passed"},
+    {"id": 2, "name": "Hariom", "math": 45, "science": 55, "english": 60, "history": 50, "status": "Failed"},
+    {"id": 3, "name": "Hemant", "math": 92, "science": 88, "english": 95, "history": 80, "status": "Passed"},
+    {"id": 4, "name": "Tarun", "math": 76, "science": 85, "english": 82, "history": 90, "status": "Passed"},
+    {"id": 5, "name": "Utkarsh", "math": 60, "science": 65, "english": 58, "history": 62, "status": "Passed"},
+    {"id": 6, "name": "Uttam", "math": 10, "science": 15, "english": 18, "history": 15, "status": "Failed"},
+    {"id": 7, "name": "Abhishek", "math": 88, "science": 92, "english": 85, "history": 89, "status": "Passed"},
+    {"id": 8, "name": "Priyanshu", "math": 95, "science": 98, "english": 94, "history": 96, "status": "Passed"},
+    {"id": 9, "name": "Uday", "math": 50, "science": 55, "english": 65, "history": 60, "status": "Passed"},
+    {"id": 10, "name": "Mohit", "math": 70, "science": 75, "english": 80, "history": 72, "status": "Passed"},
+    {"id": 11, "name": "Ankit", "math": 82, "science": 79, "english": 85, "history": 88, "status": "Passed"},
+    {"id": 12, "name": "Rohit", "math": 98, "science": 95, "english": 90, "history": 92, "status": "Passed"},
+    {"id": 13, "name": "Manish", "math": 40, "science": 12, "english": 11, "history": 14, "status": "Failed"},
+    {"id": 14, "name": "Anuj", "math": 88, "science": 90, "english": 95, "history": 94, "status": "Passed"},
+    {"id": 15, "name": "Vishal", "math": 16, "science": 15, "english": 15, "history": 19, "status": "Failed"}
+]

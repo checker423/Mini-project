@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProjectFlow Dashboard - Fully Working</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <aside class="sidebar">
+        <div class="brand">
+            <span></span> ProjectFlow
+        </div>
+        <div class="nav-items">
+            <div class="nav-item active">📊 Dashboard</div>
+            <div class="nav-item">✅ Tasks</div>
+            <div class="nav-item">📈 Reports</div>
+            <div class="nav-item" style="margin-top: auto;">⚙️ Settings</div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="header">
+            <div class="welcome">
+                <h1> Welcome Back</h1>
+                <p>Manage your projects efficiently and keep everything organized. </p>
+            </div>
+        </header>
+
+        <div id="view-dashboard" class="view-section">
+
+            <div class="dashboard-layout">
+
+                <section class="projects-section">
+                    <div class="section-header">
+                        <h2>📁 Projects Dashboard</h2>
+                    </div>
+                    <div id="projects-container">
+                    </div>
+                </section>
+
+                <aside class="side-panel">
+                    <div class="actions-card">
+                        <h2> Quick Actions</h2>
+                        <br>
+                        <button class="btn btn-primary" onclick="openProjectModal()">➕ Add New Project</button>
+                        <button class="btn btn-secondary" onclick="openTaskModal()">✅ Add Task</button>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+
+        <div id="view-tasks" class="view-section" style="display: none;">
+            <div class="section-header" style="margin-bottom: 2rem;">
+                <h2>All Tasks</h2>
+                <button class="btn btn-primary" style="width: auto;" onclick="openTaskModal()">✅ Add Task</button>
+            </div>
+            <div
+                style="background: rgba(30, 41, 59, 0.6); padding: 1.5rem; border-radius: var(--border-radius); border: 1px solid rgba(255,255,255,0.05);">
+                <ul class="task-list" id="all-tasks-list" style="max-height: none;">
+                </ul>
+            </div>
+        </div>
+
+        <div id="view-reports" class="view-section" style="display: none;">
+            <div class="section-header" style="margin-bottom: 2rem;">
+                <h2>Reports</h2>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div class="progress-card">
+                    <h2> Overall Progress</h2>
+                    <div class="overall-progress">
+                        <div class="ring-wrapper">
+                            <svg viewBox="0 0 200 200" width="180" height="180">
+                                <defs>
+                                    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#f72585;"/>
+                                        <stop offset="50%" style="stop-color:#7209b7;"/>
+                                        <stop offset="100%" style="stop-color:#4361ee;"/>
+                                    </linearGradient>
+                                </defs>
+                                <circle id="ring-bg" cx="100" cy="100" r="82"
+                                    fill="none" stroke="rgba(255,255,255,0.07)"
+                                    stroke-width="12"
+                                    stroke-dasharray="8 5.2"
+                                    stroke-linecap="round"
+                                    transform="rotate(-90 100 100)"/>
+                                <circle id="ring-fg" cx="100" cy="100" r="82"
+                                    fill="none" stroke="url(#ringGrad)"
+                                    stroke-width="12"
+                                    stroke-dasharray="0 1000"
+                                    stroke-linecap="round"
+                                    transform="rotate(-90 100 100)"
+                                    style="transition: stroke-dasharray 1.2s cubic-bezier(0.4,0,0.2,1);"/>
+                                <circle cx="100" cy="100" r="65" fill="var(--surface-color)"/>
+                                <text x="100" y="95" text-anchor="middle" font-size="28" font-weight="700" fill="white" id="ring-percent">0%</text>
+                                <text x="100" y="118" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.5)">OVERALL</text>
+                            </svg>
+                        </div>
+                        <p style="color: #f72585; margin-bottom: 0.5rem; font-weight: 500; text-shadow: 0 0 10px rgba(247,37,133,0.3);" id="progress-completed-text">Completed: 0 Tasks</p>
+                        <p style="color: #4361ee; font-weight: 500; text-shadow: 0 0 10px rgba(67,97,238,0.3);" id="progress-pending-text">Pending: 0 Tasks</p>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <h2> Project Progress Graph</h2>
+                    <br>
+                    <div id="projects-graph" style="display: flex; justify-content: center; align-items: flex-end; gap: 2rem; padding-top: 1rem; min-height: 250px;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-settings" class="view-section" style="display: none;">
+            <div class="section-header" style="margin-bottom: 2rem;">
+                <h2>Settings</h2>
+            </div>
+            <div class="settings-card"
+                style="background: rgba(30, 41, 59, 0.6); padding: 1.5rem; border-radius: var(--border-radius); border: 1px solid rgba(255,255,255,0.05); max-width: 600px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3 style="margin-bottom: 0.5rem;">Appearance Theme</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Switch between dark and light mode
+                            for the dashboard</p>
+                    </div>
+                    <button class="btn btn-secondary" style="width: auto; margin-bottom: 0;" id="theme-toggle"
+                        onclick="toggleTheme()">☀️ Light Mode</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal-content">
+            <h2>Add New Project</h2>
+            <br>
+            <form id="project-form">
+                <div class="form-group">
+                    <label>Project Name (Emoji + Name)</label>
+                    <input type="text" id="proj-name" placeholder="e.g. 🌐 Portfolio Website" required>
+                </div>
+                <div class="form-group">
+                    <label>Priority</label>
+                    <select id="proj-priority">
+                        <option value="🔴 High">🔴 High</option>
+                        <option value="🟡 Medium">🟡 Medium</option>
+                        <option value="🟢 Low">🟢 Low</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="proj-status">
+                        <option value="🟢 In Progress">🟢 In Progress</option>
+                        <option value="🟡 Ongoing">🟡 Ongoing</option>
+                        <option value="🔵 Planning">🔵 Planning</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModals()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="task-modal">
+        <div class="modal-content">
+            <h2>Add New Task</h2>
+            <br>
+            <form id="task-form">
+                <div class="form-group">
+                    <label>Select Project</label>
+                    <select id="task-project" required>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Task Description</label>
+                    <input type="text" id="task-name" placeholder="e.g. Design Homepage" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModals()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

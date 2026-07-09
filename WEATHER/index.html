@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div class="mainBox mainBox1 ">
+    <img src="drizzle.png" />
+    <h1 class="weather">Weather</h1>
+    <h2 class="ForeCasts">ForeCasts</h2>
+    <button class="start">Get Start</button>
+  </div>
+  <div class="mainBox mainBox2 inactive">
+    <div style="width: 100%; padding: 0 0 15px; text-align: left;">
+      <button id="backBtn" style="background: transparent; border: none; color: #fbbf24; font-size: 24px; cursor: pointer; font-weight: 600;" title="Go Back">&#8592;</button>
+    </div>
+    <div class="searchBox">
+      <input type="text" placeholder="Enter your city" id="inputfield" />
+      <div class="img"><img src="search.png" id="searchIcon" /></div>
+    </div>
+
+    <div id="weatherData" class="inactive">
+      <div class="iconBox">
+        <img src="clear.png" id="icon" />
+        <p id="desc">--</p>
+      </div>
+
+      <div class="tempBox">
+        <p id="todayText" style="color: #cbd5e1; font-size: 14px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Today</p>
+        <h1 id="temp">--°c</h1>
+        <h3 id="city">City Name</h3>
+      </div>
+
+      <div class="extraDetails">
+        <div class="wind">
+          <img src="wind.png" id="windIcon" />
+          <div class="windData">
+            <p id="windSpeed">--km/h</p>
+            <p>wind</p>
+          </div>
+        </div>
+        <div class="humidity">
+          <img src="humidity.png" id="humidityIcon" />
+          <div class="humidityData">
+            <p id="humidityper">--%</p>
+            <p>humidity</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="forecastBox" id="forecastBox">
+      </div>
+    </div>
+  </div>
+  <div class="mainBox mainBox3 inactive">
+    <h1>404</h1>
+    <p>Oops! Page Not Found</p>
+    <p id="info">
+      The page you're looking for doesn't exist or has been moved.
+    </p>
+    <button class="homeBtn">Go Home</button>
+  </div>
+  <script src="app.js"></script>
+</body>
+
+</html>
