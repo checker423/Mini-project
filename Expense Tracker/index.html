@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-wallet"></i>
+                <h2>Expensify</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" data-target="dashboard">
+                    <i class="fa-solid fa-house"></i> Dashboard
+                </button>
+                <button class="nav-btn" data-target="analytics">
+                    <i class="fa-solid fa-chart-pie"></i> Analytics
+                </button>
+                <button class="nav-btn" data-target="income-cards">
+                    <i class="fa-solid fa-money-bill-wave"></i> Income Cards
+                </button>
+                <button class="nav-btn" data-target="expense-cards">
+                    <i class="fa-solid fa-credit-card"></i> Expense Cards
+                </button>
+                <button class="nav-btn" data-target="transactions">
+                    <i class="fa-solid fa-list"></i> All Transactions
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1 id="page-title">Dashboard</h1>
+                <p id="page-subtitle">Welcome back! Here is your financial overview.</p>
+            </header>
+
+            <!-- SECTION: DASHBOARD -->
+            <section id="dashboard" class="page-section active">
+                <div class="stats-grid">
+                    <div class="stat-card balance">
+                        <div class="stat-icon"><i class="fa-solid fa-vault"></i></div>
+                        <div>
+                            <p>Total Balance</p>
+                            <h2 id="balance">₹0.00</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card income">
+                        <div class="stat-icon"><i class="fa-solid fa-arrow-down"></i></div>
+                        <div>
+                            <p>Total Income</p>
+                            <h2 id="income">₹0.00</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card expense">
+                        <div class="stat-icon"><i class="fa-solid fa-arrow-up"></i></div>
+                        <div>
+                            <p>Total Expense</p>
+                            <h2 id="expense">₹0.00</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-split">
+                    <!-- Left: Recent History -->
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h3>Recent Transactions</h3>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <tbody id="recent-list">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                            <div class="empty-state" id="recent-empty">No transactions yet.</div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Add Transaction -->
+                    <div class="panel action-panel">
+                        <div class="panel-header">
+                            <h3>Add Transaction</h3>
+                        </div>
+                        
+                        <div class="type-toggle">
+                            <button type="button" class="toggle-btn active" id="btn-expense" data-type="expense">Expense</button>
+                            <button type="button" class="toggle-btn" id="btn-income" data-type="income">Income</button>
+                        </div>
+
+                        <form id="form">
+                            <input type="hidden" id="trans-type" value="expense">
+                            <div class="form-group">
+                                <label>Title / Description</label>
+                                <input type="text" id="text" placeholder="e.g. Salary, Rent, Food" required autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label>Amount (₹)</label>
+                                <input type="number" id="amount" placeholder="0.00" min="1" step="any" required>
+                            </div>
+                            <button type="submit" class="btn-primary">
+                                Add to record
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: ANALYTICS -->
+            <section id="analytics" class="page-section">
+                <div class="charts-grid">
+                    <!-- Chart 1: Doughnut (Income vs Expense) -->
+                    <div class="panel chart-panel">
+                        <div class="panel-header">
+                            <h3>Income vs Expense</h3>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="chart1"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Chart 2: Bar Chart (Recent Flow) -->
+                    <div class="panel chart-panel">
+                        <div class="panel-header">
+                            <h3>Recent Cash Flow</h3>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="chart2"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECTION: INCOME CARDS -->
+            <section id="income-cards" class="page-section">
+                <!-- Add Income Form directly inside the tab -->
+                <div class="panel action-panel" style="margin-bottom: 2rem; border-color: rgba(16, 185, 129, 0.3);">
+                    <div class="panel-header">
+                        <h3 style="color: #34d399;"><i class="fa-solid fa-plus"></i> Add New Income</h3>
+                    </div>
+                    <form id="form-income-only" style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 1rem; align-items: flex-end;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Income Source</label>
+                            <input type="text" id="income-text" placeholder="e.g. Salary, Freelance" required autocomplete="off">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Amount (₹)</label>
+                            <input type="number" id="income-amount" placeholder="0.00" min="1" step="any" required>
+                        </div>
+                        <button type="submit" class="btn-primary" style="margin-top: 0; background: var(--success); height: 100%;">
+                            Add Income
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="cards-grid" id="income-cards-container">
+                    <!-- Cards will be generated by JS -->
+                </div>
+            </section>
+
+            <!-- SECTION: EXPENSE CARDS -->
+            <section id="expense-cards" class="page-section">
+                <!-- Add Expense Form directly inside the tab -->
+                <div class="panel action-panel" style="margin-bottom: 2rem; border-color: rgba(239, 68, 68, 0.3);">
+                    <div class="panel-header">
+                        <h3 style="color: #f87171;"><i class="fa-solid fa-plus"></i> Add New Expense</h3>
+                    </div>
+                    <form id="form-expense-only" style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 1rem; align-items: flex-end;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Expense Detail</label>
+                            <input type="text" id="expense-text" placeholder="e.g. Rent, Grocery" required autocomplete="off">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Amount (₹)</label>
+                            <input type="number" id="expense-amount" placeholder="0.00" min="1" step="any" required>
+                        </div>
+                        <button type="submit" class="btn-primary" style="margin-top: 0; background: var(--danger); height: 100%;">
+                            Add Expense
+                        </button>
+                    </form>
+                </div>
+
+                <div class="cards-grid" id="expense-cards-container">
+                    <!-- Cards will be generated by JS -->
+                </div>
+            </section>
+
+            <!-- SECTION: TRANSACTIONS -->
+            <section id="transactions" class="page-section">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>Full Transaction History</h3>
+                        <button id="clear-all" class="btn-danger">Clear All History</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table full-table">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th class="text-right">Amount</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="full-list">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                        <div class="empty-state" id="full-empty">No transactions found.</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
